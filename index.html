@@ -12,8 +12,6 @@
             --primary-color: #d9777f;
             --whatsapp-green: #25D366;
             --whatsapp-hover: #1ebd5a;
-            --toters-green: #00B14F;
-            --toters-hover: #009643;
             --bg-gradient: linear-gradient(135deg, #fff5f5 0%, #f7eff2 100%);
             --card-bg: #ffffff;
             --text-main: #333333;
@@ -94,34 +92,20 @@
             margin-bottom: 22px;
         }
 
-        .action-btn {
+        /* زر واتساب */
+        .whatsapp-btn {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
+            background-color: var(--whatsapp-green);
             color: #fff;
             text-decoration: none;
-            padding: 13px;
+            padding: 14px;
             border-radius: 14px;
             font-size: 1.05rem;
             font-weight: 700;
             transition: all 0.3s ease;
-        }
-
-        /* زر توترز */
-        .toters-btn {
-            background-color: var(--toters-green);
-            box-shadow: 0 4px 12px rgba(0, 177, 79, 0.25);
-        }
-
-        .toters-btn:hover {
-            background-color: var(--toters-hover);
-            transform: translateY(-2px);
-        }
-
-        /* زر واتساب */
-        .whatsapp-btn {
-            background-color: var(--whatsapp-green);
             box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
         }
 
@@ -223,12 +207,7 @@
         <p class="store-bio">أجمل باقات الورد وتنسيقات الهدايا لجميع مناسباتكم السعيدة. خدمة توصيل سريعة وعناية فائقة.</p>
 
         <div class="action-buttons">
-            <a href="https://totersapp.com" target="_blank" class="action-btn toters-btn">
-                <i class="fa-solid fa-bag-shopping fa-lg"></i>
-                اطلب عبر تطبيق Toters
-            </a>
-
-            <a href="https://wa.me/96170625359?text=مرحباً،%20أود%20الاستفسار%20عن%20باقات%20الورد%20المتوفرة" target="_blank" class="action-btn whatsapp-btn">
+            <a href="https://wa.me/96170625359?text=مرحباً،%20أود%20الاستفسار%20عن%20باقات%20الورد%20المتوفرة" target="_blank" class="whatsapp-btn">
                 <i class="fa-brands fa-whatsapp fa-xl"></i>
                 تواصل معنا عبر واتساب
             </a>
@@ -241,7 +220,7 @@
             <a href="https://www.tiktok.com/@takkoush.bristol?_r=1&_t=ZS-99LijOKpa6f" target="_blank" class="social-icon tiktok" title="تيك توك">
                 <i class="fa-brands fa-tiktok"></i>
             </a>
-            <a href="https://www.facebook.com/share/1C7TgWeXVU/ " target="_blank" class="social-icon facebook" title="فيسبوك">
+            <a href="https://www.facebook.com/share/1C7TgWeXVU/" target="_blank" class="social-icon facebook" title="فيسبوك">
                 <i class="fa-brands fa-facebook-f"></i>
             </a>
         </div>
@@ -273,4 +252,3 @@
 
 </body>
 </html>
-2
