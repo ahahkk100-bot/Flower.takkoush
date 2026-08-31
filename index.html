@@ -10,6 +10,7 @@
     <style>
         :root {
             --primary-color: #d9777f;
+            --primary-hover: #c55d66;
             --whatsapp-green: #25D366;
             --whatsapp-hover: #1ebd5a;
             --bg-gradient: linear-gradient(135deg, #fff5f5 0%, #f7eff2 100%);
@@ -92,7 +93,6 @@
             margin-bottom: 22px;
         }
 
-        /* زر واتساب */
         .whatsapp-btn {
             display: flex;
             align-items: center;
@@ -114,7 +114,7 @@
             transform: translateY(-2px);
         }
 
-        /* روابط وسائل التواصل الاجتماعي */
+        /* وسائل التواصل الاجتماعي */
         .social-links {
             display: flex;
             justify-content: center;
@@ -144,7 +144,7 @@
         .tiktok { background-color: #000000; }
         .facebook { background-color: #1877F2; }
 
-        /* معرض المنتجات */
+        /* معرض المنتجات والتصنيفات */
         .section-title {
             font-size: 1.1rem;
             font-weight: 700;
@@ -152,8 +152,14 @@
             text-align: right;
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: space-between;
             color: #2c3e50;
+        }
+
+        .section-title span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: normal;
         }
 
         .products-grid {
@@ -169,6 +175,12 @@
             aspect-ratio: 1 / 1;
             background-color: #f0f0f0;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .product-card:active {
+            transform: scale(0.97);
         }
 
         .product-card img {
@@ -186,12 +198,158 @@
             position: absolute;
             bottom: 8px;
             right: 8px;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.65);
             color: #fff;
-            padding: 3px 8px;
+            padding: 4px 10px;
             border-radius: 6px;
-            font-size: 0.75rem;
+            font-size: 0.78rem;
+            font-weight: 500;
             backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* نافذة المعرض المنبثقة (Popup Gallery Modal) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(6px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #fff;
+            width: 100%;
+            max-width: 500px;
+            max-height: 85vh;
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            animation: popUp 0.3s ease-out;
+        }
+
+        @keyframes popUp {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 12px;
+            margin-bottom: 15px;
+        }
+
+        .modal-header h2 {
+            font-size: 1.2rem;
+            color: #2c3e50;
+        }
+
+        .close-btn {
+            background: #f0f0f0;
+            border: none;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: #555;
+            transition: background 0.2s;
+        }
+
+        .close-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1 / 1;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #eee;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.2s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* نافذة عرض الصورة بالحجم الكامل (Fullscreen Lightbox) */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 95%;
+            max-height: 90vh;
+            border-radius: 12px;
+            object-fit: contain;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     </style>
 </head>
@@ -226,29 +384,131 @@
         </div>
 
         <div class="section-title">
-            <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--primary-color);"></i>
-            أحدث الباقات والمنتجات
+            <div>
+                <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--primary-color);"></i>
+                أحدث الباقات والتنسيقات
+            </div>
+            <span>(اضغط للاستعراض)</span>
         </div>
         
         <div class="products-grid">
-            <div class="product-card">
+            <div class="product-card" onclick="openGallery('bouquets')">
+                <img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=300" alt="بوكي وسلال ورد">
+                <span class="product-tag"><i class="fa-solid fa-images"></i> بوكي وسلال ورد</span>
+            </div>
+
+            <div class="product-card" onclick="openGallery('tulips')">
                 <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=300" alt="باقة توليب">
-                <span class="product-tag">باقة توليب</span>
+                <span class="product-tag"><i class="fa-solid fa-images"></i> باقات توليب</span>
             </div>
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=300" alt="ورد جوري">
-                <span class="product-tag">ورد طبيعي</span>
-            </div>
-            <div class="product-card">
+
+            <div class="product-card" onclick="openGallery('gifts')">
                 <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?w=300" alt="تنسيق هدايا">
-                <span class="product-tag">تنسيق هدايا</span>
+                <span class="product-tag"><i class="fa-solid fa-images"></i> تنسيق هدايا</span>
             </div>
-            <div class="product-card">
+
+            <div class="product-card" onclick="openGallery('dried')">
                 <img src="https://images.unsplash.com/photo-1508610048659-a06b669e3321?w=300" alt="أزهار مجففة">
-                <span class="product-tag">أزهار مجففة</span>
+                <span class="product-tag"><i class="fa-solid fa-images"></i> أزهار مجففة</span>
             </div>
         </div>
     </div>
 
+    <div class="modal" id="galleryModal" onclick="closeModalOnOutsideClick(event)">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">اسم التصنيف</h2>
+                <button class="close-btn" onclick="closeGallery()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="gallery-grid" id="galleryGrid">
+                </div>
+        </div>
+    </div>
+
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></button>
+        <img id="lightboxImg" src="" alt="صورة كاملة">
+    </div>
+
+    <script>
+        // هنا يمكنك إضافة أو تغيير صور كل تصنيف (سواء روابط أو أسماء ملفات مرفوعة على GitHub)
+        const categories = {
+            bouquets: {
+                title: "بوكي وسلال ورد 💐",
+                images: [
+                    "https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=800",
+                    "https://images.unsplash.com/photo-1563245372-f21724e3856d?w=800",
+                    "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=800",
+                    "https://images.unsplash.com/photo-1561181286-d3fee7d55364?w=800"
+                ]
+            },
+            tulips: {
+                title: "باقات توليب 🌷",
+                images: [
+                    "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=800",
+                    "https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=800"
+                ]
+            },
+            gifts: {
+                title: "تنسيق هدايا ومناسبات 🎁",
+                images: [
+                    "https://images.unsplash.com/photo-1561181286-d3fee7d55364?w=800",
+                    "https://images.unsplash.com/photo-1563245372-f21724e3856d?w=800"
+                ]
+            },
+            dried: {
+                title: "أزهار مجففة وديكور 🌾",
+                images: [
+                    "https://images.unsplash.com/photo-1508610048659-a06b669e3321?w=800",
+                    "https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=800"
+                ]
+            }
+        };
+
+        // فتح معرض التصنيف
+        function openGallery(categoryKey) {
+            const data = categories[categoryKey];
+            if (!data) return;
+
+            document.getElementById('modalTitle').innerText = data.title;
+            const grid = document.getElementById('galleryGrid');
+            grid.innerHTML = '';
+
+            data.images.forEach(imgSrc => {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                item.innerHTML = `<img src="${imgSrc}" alt="${data.title}">`;
+                item.onclick = () => openLightbox(imgSrc);
+                grid.appendChild(item);
+            });
+
+            document.getElementById('galleryModal').classList.add('active');
+        }
+
+        // إغلاق المعرض
+        function closeGallery() {
+            document.getElementById('galleryModal').classList.remove('active');
+        }
+
+        // إغلاق المعرض بالضغط خارج النافذة
+        function closeModalOnOutsideClick(e) {
+            if (e.target.id === 'galleryModal') {
+                closeGallery();
+            }
+        }
+
+        // فتح الصورة بكامل الشاشة
+        function openLightbox(src) {
+            document.getElementById('lightboxImg').src = src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+
+        // إغلاق عرض كامل الشاشة
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+    </script>
+
 </body>
 </html>
+w
