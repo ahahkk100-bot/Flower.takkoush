@@ -18,6 +18,8 @@
             --card-bg: #ffffff;
             --text-main: #2c3e50;
             --text-muted: #666666;
+            --danger: #e74c3c;
+            --edit: #f39c12;
         }
 
         * {
@@ -33,7 +35,7 @@
             min-height: 100vh;
         }
 
-        /* شاشة الصفحة الرئيسية */
+        /* ----------------- الصفحة الرئيسية ----------------- */
         #homeView {
             display: flex;
             justify-content: center;
@@ -53,7 +55,6 @@
             position: relative;
         }
 
-        /* زر تسجيل دخول المسؤول */
         .admin-login-trigger {
             position: absolute;
             top: 20px;
@@ -73,10 +74,9 @@
             transition: all 0.25s ease;
         }
 
-        .admin-login-trigger:hover {
+        .admin-login-trigger.logged-in {
             background: var(--primary);
             color: #fff;
-            transform: scale(1.08);
         }
 
         .avatar-container {
@@ -158,11 +158,7 @@
             transition: transform 0.2s ease, opacity 0.2s ease;
         }
 
-        .social-icon:hover {
-            transform: scale(1.1);
-            opacity: 0.9;
-        }
-
+        .social-icon:hover { transform: scale(1.1); }
         .instagram { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
         .tiktok { background-color: #000000; }
         .facebook { background-color: #1877F2; }
@@ -192,23 +188,15 @@
             background-color: #f0f0f0;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease;
         }
 
-        .category-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
+        .category-card:hover { transform: translateY(-4px); }
 
         .category-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.4s ease;
-        }
-
-        .category-card:hover img {
-            transform: scale(1.08);
         }
 
         .category-overlay {
@@ -230,9 +218,7 @@
             gap: 6px;
         }
 
-        /* ------------------------------------------- */
-        /* شاشة المعرض (Gallery View) */
-        /* ------------------------------------------- */
+        /* ----------------- المعرض ----------------- */
         #galleryView {
             display: none;
             padding-bottom: 40px;
@@ -264,11 +250,6 @@
             padding: 8px 16px;
             border-radius: 12px;
             cursor: pointer;
-            transition: background 0.2s ease;
-        }
-
-        .back-btn:hover {
-            background: #ebebeb;
         }
 
         .store-header-title {
@@ -292,9 +273,7 @@
             scrollbar-width: none;
         }
 
-        .tabs-container::-webkit-scrollbar {
-            display: none;
-        }
+        .tabs-container::-webkit-scrollbar { display: none; }
 
         .tab-btn {
             background: #ffffff;
@@ -339,10 +318,7 @@
         }
 
         @media (min-width: 600px) {
-            .photos-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 16px;
-            }
+            .photos-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
         }
 
         .photo-card {
@@ -350,14 +326,9 @@
             border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            cursor: pointer;
+            position: relative;
             display: flex;
             flex-direction: column;
-            transition: transform 0.3s ease;
-        }
-
-        .photo-card:hover {
-            transform: translateY(-3px);
         }
 
         .photo-img-wrap {
@@ -365,24 +336,29 @@
             width: 100%;
             overflow: hidden;
             background: #eee;
+            cursor: pointer;
         }
 
         .photo-img-wrap img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.3s ease;
         }
+
+        .photo-img-wrap:hover img { transform: scale(1.06); }
 
         .photo-info {
             padding: 10px;
             text-align: right;
+            cursor: pointer;
         }
 
         .photo-title {
             font-size: 0.9rem;
             font-weight: 700;
             color: var(--text-main);
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         .photo-price {
@@ -391,7 +367,38 @@
             color: var(--primary);
         }
 
-        /* نافذة العرض بكامل الشاشة (Lightbox) */
+        /* أدوات المدير فوق كل بطاقة */
+        .admin-item-actions {
+            display: none;
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            gap: 6px;
+            z-index: 10;
+        }
+
+        .admin-logged .admin-item-actions {
+            display: flex;
+        }
+
+        .action-icon-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            font-size: 0.85rem;
+        }
+
+        .btn-edit { background: var(--edit); }
+        .btn-delete { background: var(--danger); }
+
+        /* ----------------- Lightbox ----------------- */
         .lightbox {
             display: none;
             position: fixed;
@@ -404,9 +411,7 @@
             padding: 16px;
         }
 
-        .lightbox.active {
-            display: flex;
-        }
+        .lightbox.active { display: flex; }
 
         .lightbox img {
             max-width: 95%;
@@ -423,29 +428,11 @@
             max-width: 400px;
         }
 
-        .lightbox-details h3 {
-            font-size: 1.2rem;
-            margin-bottom: 4px;
-        }
+        .lightbox-details h3 { font-size: 1.2rem; margin-bottom: 4px; }
+        .lightbox-details .price { font-size: 1.1rem; color: #ff9aa2; font-weight: 700; margin-bottom: 6px; }
+        .lightbox-details p { font-size: 0.9rem; color: #ddd; line-height: 1.4; }
 
-        .lightbox-details .price {
-            font-size: 1.1rem;
-            color: #ff9aa2;
-            font-weight: 700;
-            margin-bottom: 6px;
-        }
-
-        .lightbox-details p {
-            font-size: 0.9rem;
-            color: #ddd;
-            line-height: 1.4;
-        }
-
-        .lightbox-actions {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .lightbox-actions { display: flex; align-items: center; gap: 10px; }
 
         .order-current-btn {
             background-color: var(--whatsapp);
@@ -492,28 +479,24 @@
             justify-content: center;
         }
 
-        /* ------------------------------------------- */
-        /* نافذة تسجيل الدخول ولوحة التحكم */
-        /* ------------------------------------------- */
+        /* ----------------- النوافذ المنبثقة للتحكم ----------------- */
         .admin-modal {
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.75);
             z-index: 2000;
             justify-content: center;
             align-items: center;
             padding: 16px;
         }
 
-        .admin-modal.active {
-            display: flex;
-        }
+        .admin-modal.active { display: flex; }
 
         .admin-box {
             background: #fff;
             width: 100%;
-            max-width: 440px;
+            max-width: 450px;
             border-radius: 20px;
             padding: 24px;
             text-align: right;
@@ -521,38 +504,38 @@
             overflow-y: auto;
         }
 
-        .admin-box h2 {
-            font-size: 1.25rem;
-            margin-bottom: 16px;
-            color: var(--text-main);
+        .admin-tabs-nav {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 16px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 8px;
         }
 
-        .form-group {
-            margin-bottom: 14px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.85rem;
+        .admin-tab-link {
+            background: none;
+            border: none;
             font-weight: 700;
-            margin-bottom: 6px;
             color: var(--text-muted);
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 8px;
         }
 
+        .admin-tab-link.active {
+            background: #fff0f2;
+            color: var(--primary);
+        }
+
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 4px; color: var(--text-muted); }
         .form-group input, .form-group select, .form-group textarea {
             width: 100%;
-            padding: 10px 12px;
+            padding: 10px;
             border: 1px solid #ddd;
             border-radius: 10px;
             font-size: 0.95rem;
             outline: none;
-        }
-
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-            border-color: var(--primary);
         }
 
         .admin-submit-btn {
@@ -567,40 +550,31 @@
             cursor: pointer;
             margin-top: 10px;
         }
-
-        .admin-submit-btn:hover {
-            background: var(--primary-hover);
-        }
     </style>
 </head>
 <body>
 
-    <!-- 1. الشاشة الرئيسية -->
+    <!-- 1. الصفحة الرئيسية -->
     <div id="homeView">
         <div class="profile-card">
             
-            <!-- أيقونة تسجيل دخول المسؤول في الزاوية العلوية -->
-            <button class="admin-login-trigger" onclick="openAdminModal()" title="لوحة تحكم المسؤول">
+            <button class="admin-login-trigger" id="adminTriggerBtn" onclick="openAdminModal()" title="لوحة تحكم المدير">
                 <i class="fa-solid fa-user"></i>
             </button>
 
-            <!-- شعار المتجر الجديد -->
             <div class="avatar-container">
                 <img src="IMG-20260901-WA0010.jpg" alt="شعار أزهار طقوش">
             </div>
 
-            <!-- اسم المتجر -->
             <h1 class="store-name-ar">أزهار طقوش 🌸</h1>
             <div class="store-name-en">Takkosh Flower Bristol</div>
             <p class="store-bio">أجمل باقات الورد وتنسيقات الهدايا لجميع مناسباتكم السعيدة. خدمة توصيل سريعة وعناية فائقة.</p>
 
-            <!-- زر واتساب الرئيسي -->
             <a href="https://wa.me/96170625359?text=مرحباً،%20أود%20الاستفسار%20عن%20باقات%20الورد%20المتوفرة" target="_blank" class="whatsapp-btn">
                 <i class="fa-brands fa-whatsapp fa-xl"></i>
                 تواصل معنا عبر واتساب
             </a>
 
-            <!-- حسابات التواصل الاجتماعي مع ماسنجر -->
             <div class="social-links">
                 <a href="https://www.instagram.com/flowers.takkoush?igsi=MWNuZTF5ZTVnZ2ozdA==" target="_blank" class="social-icon instagram" title="إنستغرام">
                     <i class="fa-brands fa-instagram"></i>
@@ -616,45 +590,16 @@
                 </a>
             </div>
 
-            <!-- قائمة التصنيفات -->
             <div class="section-title">
                 <i class="fa-solid fa-layer-group" style="color: var(--primary);"></i>
                 تصفح أقسام الأزهار
             </div>
             
-            <div class="categories-grid">
-                <div class="category-card" onclick="goToGallery('bouquets')">
-                    <img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=400" alt="بوكي وسلال ورد">
-                    <div class="category-overlay">
-                        <span class="category-name"><i class="fa-solid fa-fan"></i> بوكي وسلال ورد</span>
-                    </div>
-                </div>
-
-                <div class="category-card" onclick="goToGallery('wedding')">
-                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400" alt="بوكيات أعراس">
-                    <div class="category-overlay">
-                        <span class="category-name"><i class="fa-solid fa-ring"></i> بوكيات أعراس</span>
-                    </div>
-                </div>
-
-                <div class="category-card" onclick="goToGallery('grad')">
-                    <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=400" alt="باقات تخرج">
-                    <div class="category-overlay">
-                        <span class="category-name"><i class="fa-solid fa-graduation-cap"></i> باقات تخرج</span>
-                    </div>
-                </div>
-
-                <div class="category-card" onclick="goToGallery('wreaths')">
-                    <img src="https://images.unsplash.com/photo-1508610048659-a06b669e3321?w=400" alt="إكليلات ومناسبات">
-                    <div class="category-overlay">
-                        <span class="category-name"><i class="fa-solid fa-dove"></i> إكليلات ومناسبات</span>
-                    </div>
-                </div>
-            </div>
+            <div class="categories-grid" id="homeCategoriesGrid"></div>
         </div>
     </div>
 
-    <!-- 2. شاشة المعرض المنفصلة -->
+    <!-- 2. شاشة المعرض -->
     <div id="galleryView">
         <div class="navbar">
             <button class="back-btn" onclick="goToHome()">
@@ -676,15 +621,15 @@
         </div>
     </div>
 
-    <!-- نافذة العرض بكامل الشاشة والتفاصيل -->
+    <!-- 3. نافذة العرض بكامل الشاشة (Lightbox) -->
     <div class="lightbox" id="lightbox">
         <button class="lightbox-close" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></button>
         <img id="lightboxImg" src="" alt="باقة ورد">
         
         <div class="lightbox-details">
             <h3 id="lightboxTitle">اسم الباقة</h3>
-            <div class="price" id="lightboxPrice">$0</div>
-            <p id="lightboxDesc">وصف الباقة وتفاصيل الورد</p>
+            <div class="price" id="lightboxPrice"></div>
+            <p id="lightboxDesc"></p>
         </div>
 
         <div class="lightbox-actions">
@@ -698,16 +643,13 @@
         </div>
     </div>
 
-    <!-- 3. نافذة تسجيل دخول المسؤول ولوحة التحكم -->
+    <!-- 4. نافذة التحكم والمدير -->
     <div class="admin-modal" id="adminModal">
         <div class="admin-box">
             
-            <!-- نموذج الدخول -->
+            <!-- شاشة تسجيل الدخول -->
             <div id="loginFormSection">
-                <h2>
-                    <span>تسجيل دخول المسؤول</span>
-                    <i class="fa-solid fa-lock" style="color: var(--primary);"></i>
-                </h2>
+                <h2 style="margin-bottom: 14px;">تسجيل دخول المدير 🔒</h2>
                 <div class="form-group">
                     <label>اسم المستخدم</label>
                     <input type="text" id="adminUser" placeholder="أدخل اسم المستخدم">
@@ -716,83 +658,176 @@
                     <label>كلمة المرور</label>
                     <input type="password" id="adminPass" placeholder="أدخل كلمة المرور">
                 </div>
-                <button class="admin-submit-btn" onclick="checkAdminLogin()">دخول للوحة التحكم</button>
+                <button class="admin-submit-btn" onclick="checkAdminLogin()">دخول</button>
             </div>
 
-            <!-- لوحة إضافة المنتجات (تظهر بعد الدخول) -->
+            <!-- لوحة التحكم الكاملة للمدير -->
             <div id="dashboardSection" style="display: none;">
-                <h2>
-                    <span>إضافة باقة جديدة</span>
-                    <button onclick="logoutAdmin()" style="background:none;border:none;color:red;cursor:pointer;font-size:0.9rem;">خروج</button>
-                </h2>
-                
-                <div class="form-group">
-                    <label>اختر القسم</label>
-                    <select id="itemCat">
-                        <option value="bouquets">بوكي وسلال ورد</option>
-                        <option value="wedding">بوكيات أعراس</option>
-                        <option value="grad">باقات تخرج</option>
-                        <option value="wreaths">إكليلات ومناسبات</option>
-                    </select>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <h3 style="font-size: 1.1rem; color: var(--primary);">لوحة التحكم الإدارية</h3>
+                    <button onclick="logoutAdmin()" style="background:none; border:none; color:var(--danger); cursor:pointer; font-weight:700;">تسجيل خروج</button>
                 </div>
-                <div class="form-group">
-                    <label>رابط الصورة (أو اسم الملف المرفوع)</label>
-                    <input type="text" id="itemImg" placeholder="مثال: https://... أو photo1.jpg">
+
+                <div class="admin-tabs-nav">
+                    <button class="admin-tab-link active" id="tabAddProductBtn" onclick="switchAdminTab('product')">إضافة باقة</button>
+                    <button class="admin-tab-link" id="tabAddCategoryBtn" onclick="switchAdminTab('category')">إضافة تصنيف جديد</button>
                 </div>
-                <div class="form-group">
-                    <label>اسم الباقة</label>
-                    <input type="text" id="itemTitle" placeholder="مثال: باقة ورد جوري فاخرة">
+
+                <!-- تبويب إضافة باقة -->
+                <div id="tabProductSection">
+                    <div class="form-group">
+                        <label>القسم / التصنيف *</label>
+                        <select id="itemCat"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>رابط الصورة (أو اسمها المرفوع) *</label>
+                        <input type="text" id="itemImg" placeholder="مثال: https://... أو rose.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label>اسم الباقة *</label>
+                        <input type="text" id="itemTitle" placeholder="مثال: باقة ورد جوري فاخرة">
+                    </div>
+                    <div class="form-group">
+                        <label>السعر (اختياري)</label>
+                        <input type="text" id="itemPrice" placeholder="مثال: $25">
+                    </div>
+                    <div class="form-group">
+                        <label>الوصف والتفاصيل (اختياري)</label>
+                        <textarea id="itemDesc" rows="2" placeholder="اكتب تفاصيل إضافية عن الباقة..."></textarea>
+                    </div>
+                    <button class="admin-submit-btn" onclick="addNewProduct()">حفظ ونشر الباقة</button>
                 </div>
-                <div class="form-group">
-                    <label>السعر ($)</label>
-                    <input type="text" id="itemPrice" placeholder="مثال: $30">
+
+                <!-- تبويب إضافة تصنيف جديد -->
+                <div id="tabCategorySection" style="display: none;">
+                    <div class="form-group">
+                        <label>اسم التصنيف الجديد *</label>
+                        <input type="text" id="newCatName" placeholder="مثال: باقات مواليد 👶">
+                    </div>
+                    <div class="form-group">
+                        <label>رابط صورة غلاف التصنيف *</label>
+                        <input type="text" id="newCatImg" placeholder="رابط صورة لغلاف هذا القسم">
+                    </div>
+                    <button class="admin-submit-btn" onclick="addNewCategory()">إضافة التصنيف للمتجر</button>
                 </div>
-                <div class="form-group">
-                    <label>الوصف والتفاصيل</label>
-                    <textarea id="itemDesc" rows="3" placeholder="اكتب تفاصيل الباقة..."></textarea>
-                </div>
-                <button class="admin-submit-btn" onclick="addNewProduct()">حفظ ونشر الباقة فوراً</button>
             </div>
 
-            <button onclick="closeAdminModal()" style="width:100%;margin-top:10px;background:#eee;border:none;padding:8px;border-radius:10px;cursor:pointer;">إغلاق النافذة</button>
+            <button onclick="closeAdminModal()" style="width:100%; margin-top:10px; background:#f0f0f0; border:none; padding:8px; border-radius:10px; cursor:pointer;">إغلاق</button>
+        </div>
+    </div>
+
+    <!-- 5. نافذة تعديل باقة موجودة -->
+    <div class="admin-modal" id="editModal">
+        <div class="admin-box">
+            <h3 style="margin-bottom: 14px; color: var(--edit);">تعديل بيانات الباقة ✏️</h3>
+            <input type="hidden" id="editCatKey">
+            <input type="hidden" id="editItemIndex">
+
+            <div class="form-group">
+                <label>رابط الصورة *</label>
+                <input type="text" id="editImg">
+            </div>
+            <div class="form-group">
+                <label>اسم الباقة *</label>
+                <input type="text" id="editTitle">
+            </div>
+            <div class="form-group">
+                <label>السعر (اختياري)</label>
+                <input type="text" id="editPrice">
+            </div>
+            <div class="form-group">
+                <label>الوصف (اختياري)</label>
+                <textarea id="editDesc" rows="2"></textarea>
+            </div>
+            <button class="admin-submit-btn" style="background: var(--edit);" onclick="saveProductEdit()">حفظ التعديلات</button>
+            <button onclick="closeEditModal()" style="width:100%; margin-top:10px; background:#f0f0f0; border:none; padding:8px; border-radius:10px; cursor:pointer;">إلغاء</button>
         </div>
     </div>
 
     <script>
-        // بيانات المنتجات الافتراضية
-        const defaultData = {
+        const initialData = {
             bouquets: {
                 name: "بوكي وسلال ورد 💐",
+                cover: "https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=400",
                 items: [
-                    { title: "سلة جوري وردي", price: "$25", desc: "تنسيق أنيق من الورد الجوري الوردي الطبيعي مع تغليف فاخر.", img: "https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=800" },
-                    { title: "بوكيه مشكل أنيق", price: "$35", desc: "مجموعة منتقاة بعناية من أجمل الأزهار الطبيعية.", img: "https://images.unsplash.com/photo-1563245372-f21724e3856d?w=800" }
+                    { title: "سلة جوري وردي", price: "$25", desc: "تنسيق أنيق من الورد الجوري الوردي الطبيعي.", img: "https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=800" },
+                    { title: "بوكيه مشكل أنيق", price: "$35", desc: "مجموعة منتقاة بعناية من أجمل الأزهار.", img: "https://images.unsplash.com/photo-1563245372-f21724e3856d?w=800" }
                 ]
             },
             wedding: {
                 name: "بوكيات أعراس 💍",
+                cover: "https://images.unsplash.com/photo-1519741497674-611481863552?w=400",
                 items: [
-                    { title: "مسكة عروس ملكية", price: "$60", desc: "تنسيق خاص للعرائس بأجود أنواع الورد الأبيض.", img: "https://images.unsplash.com/photo-1519741497674-611481863552?w=800" }
+                    { title: "مسكة عروس ملكية", price: "$60", desc: "تنسيق خاص للعرائس بأجود أنواع الورد.", img: "https://images.unsplash.com/photo-1519741497674-611481863552?w=800" }
                 ]
             },
             grad: {
                 name: "باقات تخرج 🎓",
+                cover: "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=400",
                 items: [
-                    { title: "بوكيه فرحة التخرج", price: "$30", desc: "ألوان زاهية وتنسيق مبهج لمناسبات التخرج.", img: "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=800" }
+                    { title: "بوكيه فرحة التخرج", price: "$30", desc: "ألوان زاهية لمناسبات التخرج السعيدة.", img: "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=800" }
                 ]
             },
             wreaths: {
                 name: "إكليلات ومناسبات 🕊️",
+                cover: "https://images.unsplash.com/photo-1508610048659-a06b669e3321?w=400",
                 items: [
-                    { title: "إكليل ورد طبيعي", price: "$50", desc: "تنسيق متناسق ومتقن للمناسبات والتعازي.", img: "https://images.unsplash.com/photo-1508610048659-a06b669e3321?w=800" }
+                    { title: "إكليل ورد طبيعي", price: "$50", desc: "تنسيق متقن للمناسبات الرسمية.", img: "https://images.unsplash.com/photo-1508610048659-a06b669e3321?w=800" }
                 ]
             }
         };
 
-        // تحميل البيانات من الذاكرة أو الافتراضية
-        let galleryData = JSON.parse(localStorage.getItem('takkosh_gallery_data')) || defaultData;
+        let galleryData = JSON.parse(localStorage.getItem('takkosh_store_data')) || initialData;
+        let isAdminLoggedIn = sessionStorage.getItem('takkosh_admin_auth') === 'true';
+        let currentCat = Object.keys(galleryData)[0] || 'bouquets';
 
-        let currentCat = 'bouquets';
+        function saveStorage() {
+            localStorage.setItem('takkosh_store_data', JSON.stringify(galleryData));
+        }
 
+        function updateAdminVisuals() {
+            const trigger = document.getElementById('adminTriggerBtn');
+            if (isAdminLoggedIn) {
+                document.body.classList.add('admin-logged');
+                trigger.classList.add('logged-in');
+            } else {
+                document.body.classList.remove('admin-logged');
+                trigger.classList.remove('logged-in');
+            }
+        }
+
+        // عرض تصنيفات الصفحة الرئيسية
+        function renderHomeCategories() {
+            const container = document.getElementById('homeCategoriesGrid');
+            container.innerHTML = '';
+            Object.keys(galleryData).forEach(key => {
+                const cat = galleryData[key];
+                const card = document.createElement('div');
+                card.className = 'category-card';
+                card.onclick = () => goToGallery(key);
+                card.innerHTML = `
+                    <img src="${cat.cover || 'https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=400'}" alt="${cat.name}">
+                    <div class="category-overlay">
+                        <span class="category-name">${cat.name}</span>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            updateCategoryDropdown();
+        }
+
+        function updateCategoryDropdown() {
+            const select = document.getElementById('itemCat');
+            select.innerHTML = '';
+            Object.keys(galleryData).forEach(key => {
+                const opt = document.createElement('option');
+                opt.value = key;
+                opt.innerText = galleryData[key].name;
+                select.appendChild(opt);
+            });
+        }
+
+        // التنقل
         function goToGallery(catKey) {
             currentCat = catKey;
             document.getElementById('homeView').style.display = 'none';
@@ -806,12 +841,12 @@
             document.getElementById('galleryView').style.display = 'none';
             document.getElementById('homeView').style.display = 'flex';
             window.scrollTo(0, 0);
+            renderHomeCategories();
         }
 
         function renderTabs() {
             const tabsContainer = document.getElementById('tabsContainer');
             tabsContainer.innerHTML = '';
-
             Object.keys(galleryData).forEach(key => {
                 const btn = document.createElement('button');
                 btn.className = `tab-btn ${key === currentCat ? 'active' : ''}`;
@@ -826,36 +861,41 @@
         }
 
         function renderGallery(catKey) {
-            const data = galleryData[catKey] || galleryData['bouquets'];
+            const data = galleryData[catKey] || galleryData[Object.keys(galleryData)[0]];
             document.getElementById('categoryTitle').innerText = data.name;
 
             const grid = document.getElementById('photosGrid');
             grid.innerHTML = '';
 
-            data.items.forEach(item => {
+            data.items.forEach((item, index) => {
                 const card = document.createElement('div');
                 card.className = 'photo-card';
                 card.innerHTML = `
-                    <div class="photo-img-wrap">
+                    <div class="admin-item-actions">
+                        <button class="action-icon-btn btn-edit" title="تعديل" onclick="openEditModal('${catKey}', ${index}, event)"><i class="fa-solid fa-pen"></i></button>
+                        <button class="action-icon-btn btn-delete" title="حذف" onclick="deleteProduct('${catKey}', ${index}, event)"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                    <div class="photo-img-wrap" onclick="openLightbox(${JSON.stringify(item).replace(/"/g, '&quot;')}, '${data.name}')">
                         <img src="${item.img}" loading="lazy" alt="${item.title}">
                     </div>
-                    <div class="photo-info">
+                    <div class="photo-info" onclick="openLightbox(${JSON.stringify(item).replace(/"/g, '&quot;')}, '${data.name}')">
                         <div class="photo-title">${item.title}</div>
-                        <div class="photo-price">${item.price}</div>
+                        ${item.price ? `<div class="photo-price">${item.price}</div>` : ''}
                     </div>
                 `;
-                card.onclick = () => openLightbox(item, data.name);
                 grid.appendChild(card);
             });
+            updateAdminVisuals();
         }
 
         function openLightbox(item, categoryName) {
             document.getElementById('lightboxImg').src = item.img;
             document.getElementById('lightboxTitle').innerText = item.title;
-            document.getElementById('lightboxPrice').innerText = item.price;
-            document.getElementById('lightboxDesc').innerText = item.desc;
+            document.getElementById('lightboxPrice').innerText = item.price || '';
+            document.getElementById('lightboxDesc').innerText = item.desc || '';
 
-            const message = encodeURIComponent(`مرحباً أزهار طقوش، أود الاستفسار عن (${item.title}) - السعر: ${item.price} من قسم (${categoryName}) - الرابط: ${item.img}`);
+            const priceText = item.price ? ` - السعر: ${item.price}` : '';
+            const message = encodeURIComponent(`مرحباً أزهار طقوش، أود الاستفسار عن (${item.title})${priceText} من قسم (${categoryName}) - الرابط: ${item.img}`);
             document.getElementById('orderBtn').href = `https://wa.me/96170625359?text=${message}`;
             
             document.getElementById('lightbox').classList.add('active');
@@ -865,36 +905,62 @@
             document.getElementById('lightbox').classList.remove('active');
         }
 
-        /* ------------------------------------------- */
-        /* إدارة لوحة التحكم وتأكيد الدخول */
-        /* ------------------------------------------- */
+        /* ----------------- وظائف الإدارة ----------------- */
         function openAdminModal() {
             document.getElementById('adminModal').classList.add('active');
-        }
-
-        function closeAdminModal() {
-            document.getElementById('adminModal').classList.remove('active');
-        }
-
-        function checkAdminLogin() {
-            const user = document.getElementById('adminUser').value;
-            const pass = document.getElementById('adminPass').value;
-
-            // التحقق من اسم المستخدم وكلمة المرور المحددة
-            if (user === "SHARK MN" && pass === "7062535Am@") {
+            if (isAdminLoggedIn) {
                 document.getElementById('loginFormSection').style.display = 'none';
                 document.getElementById('dashboardSection').style.display = 'block';
+            } else {
+                document.getElementById('loginFormSection').style.display = 'block';
+                document.getElementById('dashboardSection').style.display = 'none';
+            }
+        }
+
+        function closeAdminModal() { document.getElementById('adminModal').classList.remove('active'); }
+
+        function checkAdminLogin() {
+            const user = document.getElementById('adminUser').value.trim();
+            const pass = document.getElementById('adminPass').value.trim();
+
+            if (user === "SHARK MN" && pass === "7062535Am@") {
+                isAdminLoggedIn = true;
+                sessionStorage.setItem('takkosh_admin_auth', 'true');
+                updateAdminVisuals();
+                document.getElementById('loginFormSection').style.display = 'none';
+                document.getElementById('dashboardSection').style.display = 'block';
+                if (document.getElementById('galleryView').style.display === 'block') {
+                    renderGallery(currentCat);
+                }
             } else {
                 alert("اسم المستخدم أو كلمة المرور غير صحيحة!");
             }
         }
 
         function logoutAdmin() {
+            isAdminLoggedIn = false;
+            sessionStorage.removeItem('takkosh_admin_auth');
+            updateAdminVisuals();
             document.getElementById('adminUser').value = '';
             document.getElementById('adminPass').value = '';
-            document.getElementById('loginFormSection').style.display = 'block';
-            document.getElementById('dashboardSection').style.display = 'none';
             closeAdminModal();
+            if (document.getElementById('galleryView').style.display === 'block') {
+                renderGallery(currentCat);
+            }
+        }
+
+        function switchAdminTab(tab) {
+            if (tab === 'product') {
+                document.getElementById('tabProductSection').style.display = 'block';
+                document.getElementById('tabCategorySection').style.display = 'none';
+                document.getElementById('tabAddProductBtn').classList.add('active');
+                document.getElementById('tabAddCategoryBtn').classList.remove('active');
+            } else {
+                document.getElementById('tabProductSection').style.display = 'none';
+                document.getElementById('tabCategorySection').style.display = 'block';
+                document.getElementById('tabAddProductBtn').classList.remove('active');
+                document.getElementById('tabAddCategoryBtn').classList.add('active');
+            }
         }
 
         function addNewProduct() {
@@ -904,23 +970,15 @@
             const price = document.getElementById('itemPrice').value.trim();
             const desc = document.getElementById('itemDesc').value.trim();
 
-            if (!img || !title || !price) {
-                alert("يرجى ملء كافة الحقول الأساسية (الرابط، الاسم، السعر)!");
+            if (!img || !title) {
+                alert("يرجى إدخال رابط الصورة واسم الباقة على الأقل!");
                 return;
             }
 
-            galleryData[cat].items.unshift({
-                title: title,
-                price: price,
-                desc: desc || "باقة ورد طبيعي مميزة",
-                img: img
-            });
+            galleryData[cat].items.unshift({ title, price, desc, img });
+            saveStorage();
+            alert("تم حفظ ونشر الباقة بنجاح!");
 
-            // حفظ التعديلات محلياً وتحديث العرض
-            localStorage.setItem('takkosh_gallery_data', JSON.stringify(galleryData));
-            alert("تمت إضافة الباقة بنجاح!");
-            
-            // تفريغ الحقول
             document.getElementById('itemImg').value = '';
             document.getElementById('itemTitle').value = '';
             document.getElementById('itemPrice').value = '';
@@ -931,7 +989,77 @@
                 renderGallery(currentCat);
             }
         }
+
+        function addNewCategory() {
+            const name = document.getElementById('newCatName').value.trim();
+            const cover = document.getElementById('newCatImg').value.trim();
+
+            if (!name || !cover) {
+                alert("يرجى إدخال اسم التصنيف ورابط صورة الغلاف!");
+                return;
+            }
+
+            const catKey = 'cat_' + Date.now();
+            galleryData[catKey] = { name: name, cover: cover, items: [] };
+            saveStorage();
+            alert("تمت إضافة التصنيف الجديد بنجاح!");
+
+            document.getElementById('newCatName').value = '';
+            document.getElementById('newCatImg').value = '';
+
+            renderHomeCategories();
+            closeAdminModal();
+        }
+
+        /* ----------------- التعديل والحذف المباشر ----------------- */
+        function openEditModal(catKey, index, event) {
+            event.stopPropagation();
+            const item = galleryData[catKey].items[index];
+            document.getElementById('editCatKey').value = catKey;
+            document.getElementById('editItemIndex').value = index;
+
+            document.getElementById('editImg').value = item.img;
+            document.getElementById('editTitle').value = item.title;
+            document.getElementById('editPrice').value = item.price || '';
+            document.getElementById('editDesc').value = item.desc || '';
+
+            document.getElementById('editModal').classList.add('active');
+        }
+
+        function closeEditModal() { document.getElementById('editModal').classList.remove('active'); }
+
+        function saveProductEdit() {
+            const catKey = document.getElementById('editCatKey').value;
+            const index = document.getElementById('editItemIndex').value;
+            const img = document.getElementById('editImg').value.trim();
+            const title = document.getElementById('editTitle').value.trim();
+            const price = document.getElementById('editPrice').value.trim();
+            const desc = document.getElementById('editDesc').value.trim();
+
+            if (!img || !title) {
+                alert("يرجى إدخال رابط الصورة واسم الباقة!");
+                return;
+            }
+
+            galleryData[catKey].items[index] = { title, price, desc, img };
+            saveStorage();
+            alert("تم حفظ التعديلات بنجاح!");
+            closeEditModal();
+            renderGallery(currentCat);
+        }
+
+        function deleteProduct(catKey, index, event) {
+            event.stopPropagation();
+            if (confirm("هل أنت متأكد من رغبتك في حذف هذه الباقة؟")) {
+                galleryData[catKey].items.splice(index, 1);
+                saveStorage();
+                renderGallery(catKey);
+            }
+        }
+
+        // تشغيل الصفحة لأول مرة
+        renderHomeCategories();
+        updateAdminVisuals();
     </script>
 </body>
 </html>
-a
