@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أزهار طقوش | Takkosh Flower Bristol</title>
+    <title>معرض الصور | أزهار طقوش</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
         :root {
-            --primary-color: #d9777f;
-            --primary-hover: #c55d66;
-            --whatsapp-green: #25D366;
-            --whatsapp-hover: #1ebd5a;
-            --bg-gradient: linear-gradient(135deg, #fff5f5 0%, #f7eff2 100%);
+            --primary: #d9777f;
+            --primary-hover: #c4626a;
+            --whatsapp: #25D366;
+            --bg-color: #fdf8f9;
             --card-bg: #ffffff;
-            --text-main: #333333;
-            --text-muted: #777777;
+            --text-main: #2c3e50;
+            --text-muted: #666666;
         }
 
         * {
@@ -27,300 +26,152 @@
         }
 
         body {
-            background: var(--bg-gradient);
+            background-color: var(--bg-color);
             color: var(--text-main);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            padding-bottom: 40px;
         }
 
-        .profile-card {
-            background: var(--card-bg);
-            width: 100%;
-            max-width: 480px;
-            border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            padding: 30px 24px;
-            text-align: center;
-        }
-
-        /* شعار المتجر */
-        .avatar-container {
-            position: relative;
-            width: 110px;
-            height: 110px;
-            margin: 0 auto 16px;
-        }
-
-        .avatar-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 4px solid #fff;
-            box-shadow: 0 4px 15px rgba(217, 119, 127, 0.2);
-        }
-
-        .store-name-ar {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 2px;
-            color: #2c3e50;
-        }
-
-        .store-name-en {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 8px;
-            direction: ltr;
-        }
-
-        .store-bio {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            margin-bottom: 24px;
-            line-height: 1.5;
-        }
-
-        /* أزرار الطلب والتواصل */
-        .action-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 22px;
-        }
-
-        .whatsapp-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background-color: var(--whatsapp-green);
-            color: #fff;
-            text-decoration: none;
-            padding: 14px;
-            border-radius: 14px;
-            font-size: 1.05rem;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
-        }
-
-        .whatsapp-btn:hover {
-            background-color: var(--whatsapp-hover);
-            transform: translateY(-2px);
-        }
-
-        /* وسائل التواصل الاجتماعي */
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 14px;
-            margin-bottom: 28px;
-        }
-
-        .social-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            color: #fff;
-            text-decoration: none;
-            font-size: 1.2rem;
-            transition: transform 0.2s ease, opacity 0.2s ease;
-        }
-
-        .social-icon:hover {
-            transform: scale(1.1);
-            opacity: 0.9;
-        }
-
-        .instagram { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
-        .tiktok { background-color: #000000; }
-        .facebook { background-color: #1877F2; }
-
-        /* معرض المنتجات والتصنيفات */
-        .section-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 16px;
-            text-align: right;
+        /* شريط التنقل العلوي */
+        .navbar {
+            background: #ffffff;
+            padding: 14px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            color: #2c3e50;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
 
-        .section-title span {
-            font-size: 0.8rem;
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 0.95rem;
+            background: #f5f5f5;
+            padding: 8px 14px;
+            border-radius: 12px;
+            transition: background 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background: #ebebeb;
+        }
+
+        .store-header-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px 16px;
+        }
+
+        /* شريط أزرار التصنيفات الأفقي السريع */
+        .tabs-container {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+            scrollbar-width: none;
+        }
+
+        .tabs-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-btn {
+            background: #ffffff;
+            border: 1px solid #eee;
+            padding: 10px 18px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
             color: var(--text-muted);
-            font-weight: normal;
+            transition: all 0.25s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
         }
 
-        .products-grid {
+        .tab-btn.active {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(217, 119, 127, 0.3);
+        }
+
+        .gallery-header {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        .gallery-header h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .gallery-header p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* شبكة الصور */
+        .photos-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            gap: 14px;
         }
 
-        .product-card {
-            position: relative;
-            border-radius: 14px;
+        @media (min-width: 600px) {
+            .photos-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 16px;
+            }
+        }
+
+        .photo-card {
+            background: #ffffff;
+            border-radius: 16px;
             overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             aspect-ratio: 1 / 1;
-            background-color: #f0f0f0;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
             cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
         }
 
-        .product-card:active {
-            transform: scale(0.97);
-        }
-
-        .product-card img {
+        .photo-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.3s ease;
         }
 
-        .product-card:hover img {
+        .photo-card:hover img {
             transform: scale(1.06);
         }
 
-        .product-tag {
-            position: absolute;
-            bottom: 8px;
-            right: 8px;
-            background: rgba(0, 0, 0, 0.65);
-            color: #fff;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.78rem;
-            font-weight: 500;
-            backdrop-filter: blur(4px);
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        /* نافذة المعرض المنبثقة (Popup Gallery Modal) */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(6px);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            padding: 16px;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: #fff;
-            width: 100%;
-            max-width: 500px;
-            max-height: 85vh;
-            border-radius: 20px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            animation: popUp 0.3s ease-out;
-        }
-
-        @keyframes popUp {
-            from { transform: scale(0.9); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 12px;
-            margin-bottom: 15px;
-        }
-
-        .modal-header h2 {
-            font-size: 1.2rem;
-            color: #2c3e50;
-        }
-
-        .close-btn {
-            background: #f0f0f0;
-            border: none;
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            color: #555;
-            transition: background 0.2s;
-        }
-
-        .close-btn:hover {
-            background: #e0e0e0;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            overflow-y: auto;
-            padding-right: 4px;
-        }
-
-        .gallery-item {
-            aspect-ratio: 1 / 1;
-            border-radius: 12px;
-            overflow: hidden;
-            background: #eee;
-            cursor: pointer;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.2s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-
-        /* نافذة عرض الصورة بالحجم الكامل (Fullscreen Lightbox) */
+        /* نافذة العرض بكامل الشاشة */
         .lightbox {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 2000;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 1000;
             justify-content: center;
             align-items: center;
-            padding: 10px;
+            flex-direction: column;
+            padding: 16px;
         }
 
         .lightbox.active {
@@ -329,10 +180,10 @@
 
         .lightbox img {
             max-width: 95%;
-            max-height: 90vh;
+            max-height: 75vh;
             border-radius: 12px;
             object-fit: contain;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+            margin-bottom: 16px;
         }
 
         .lightbox-close {
@@ -340,7 +191,7 @@
             top: 20px;
             right: 20px;
             background: rgba(255, 255, 255, 0.2);
-            color: #fff;
+            color: #ffffff;
             border: none;
             width: 44px;
             height: 44px;
@@ -351,164 +202,146 @@
             align-items: center;
             justify-content: center;
         }
+
+        .order-current-btn {
+            background-color: var(--whatsapp);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+        }
     </style>
 </head>
 <body>
 
-    <div class="profile-card">
-        <div class="avatar-container">
-            <img src="2b0ac39db80a0b62f75956aa92515f10.jpg" alt="شعار أزهار طقوش">
-        </div>
-
-        <h1 class="store-name-ar">أزهار طقوش 🌸</h1>
-        <div class="store-name-en">Takkosh Flower Bristol</div>
-        <p class="store-bio">أجمل باقات الورد وتنسيقات الهدايا لجميع مناسباتكم السعيدة. خدمة توصيل سريعة وعناية فائقة.</p>
-
-        <div class="action-buttons">
-            <a href="https://wa.me/96170625359?text=مرحباً،%20أود%20الاستفسار%20عن%20باقات%20الورد%20المتوفرة" target="_blank" class="whatsapp-btn">
-                <i class="fa-brands fa-whatsapp fa-xl"></i>
-                تواصل معنا عبر واتساب
-            </a>
-        </div>
-
-        <div class="social-links">
-            <a href="https://www.instagram.com/flowers.takkoush?igsi=MWNuZTF5ZTVnZ2ozdA==" target="_blank" class="social-icon instagram" title="إنستغرام">
-                <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://www.tiktok.com/@takkoush.bristol?_r=1&_t=ZS-99LijOKpa6f" target="_blank" class="social-icon tiktok" title="تيك توك">
-                <i class="fa-brands fa-tiktok"></i>
-            </a>
-            <a href="https://www.facebook.com/share/1C7TgWeXVU/" target="_blank" class="social-icon facebook" title="فيسبوك">
-                <i class="fa-brands fa-facebook-f"></i>
-            </a>
-        </div>
-
-        <div class="section-title">
-            <div>
-                <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--primary-color);"></i>
-                أحدث الباقات والتنسيقات
-            </div>
-            <span>(اضغط للاستعراض)</span>
-        </div>
-        
-        <div class="products-grid">
-            <div class="product-card" onclick="openGallery('bouquets')">
-                <img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=300" alt="بوكي وسلال ورد">
-                <span class="product-tag"><i class="fa-solid fa-images"></i> بوكي وسلال ورد</span>
-            </div>
-
-            <div class="product-card" onclick="openGallery('tulips')">
-                <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=300" alt="باقة توليب">
-                <span class="product-tag"><i class="fa-solid fa-images"></i> باقات توليب</span>
-            </div>
-
-            <div class="product-card" onclick="openGallery('gifts')">
-                <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?w=300" alt="تنسيق هدايا">
-                <span class="product-tag"><i class="fa-solid fa-images"></i> تنسيق هدايا</span>
-            </div>
-
-            <div class="product-card" onclick="openGallery('dried')">
-                <img src="https://images.unsplash.com/photo-1508610048659-a06b669e3321?w=300" alt="أزهار مجففة">
-                <span class="product-tag"><i class="fa-solid fa-images"></i> أزهار مجففة</span>
-            </div>
-        </div>
+    <div class="navbar">
+        <a href="index.html" class="back-btn">
+            <i class="fa-solid fa-arrow-right"></i>
+            الرئيسية
+        </a>
+        <div class="store-header-title">أزهار طقوش 🌸</div>
     </div>
 
-    <div class="modal" id="galleryModal" onclick="closeModalOnOutsideClick(event)">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="modalTitle">اسم التصنيف</h2>
-                <button class="close-btn" onclick="closeGallery()"><i class="fa-solid fa-xmark"></i></button>
+    <div class="container">
+        <div class="tabs-container" id="tabsContainer">
             </div>
-            <div class="gallery-grid" id="galleryGrid">
-                </div>
+
+        <div class="gallery-header">
+            <h1 id="categoryTitle">اسم القسم</h1>
+            <p>اضغط على أي صورة لتكبيرها والطلب المباشر</p>
         </div>
+
+        <div class="photos-grid" id="photosGrid"></div>
     </div>
 
     <div class="lightbox" id="lightbox">
         <button class="lightbox-close" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></button>
-        <img id="lightboxImg" src="" alt="صورة كاملة">
+        <img id="lightboxImg" src="" alt="باقة ورد">
+        <a id="orderBtn" href="#" target="_blank" class="order-current-btn">
+            <i class="fa-brands fa-whatsapp fa-lg"></i>
+            طلب هذه الباقة عبر واتساب
+        </a>
     </div>
 
     <script>
-        // هنا يمكنك إضافة أو تغيير صور كل تصنيف (سواء روابط أو أسماء ملفات مرفوعة على GitHub)
-        const categories = {
+        // قاعدة بيانات التصنيفات وصورها (يمكنك إضافة أي عدد تريده هنا بسهولة)
+        const galleryData = {
             bouquets: {
-                title: "بوكي وسلال ورد 💐",
+                name: "بوكي وسلال ورد 💐",
                 images: [
                     "https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=800",
                     "https://images.unsplash.com/photo-1563245372-f21724e3856d?w=800",
-                    "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=800",
+                    "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=800"
+                ]
+            },
+            wedding: {
+                name: "بوكيات أعراس 💍",
+                images: [
+                    "https://images.unsplash.com/photo-1519741497674-611481863552?w=800",
                     "https://images.unsplash.com/photo-1561181286-d3fee7d55364?w=800"
                 ]
             },
-            tulips: {
-                title: "باقات توليب 🌷",
+            grad: {
+                name: "باقات تخرج 🎓",
                 images: [
                     "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=800",
                     "https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=800"
                 ]
             },
-            gifts: {
-                title: "تنسيق هدايا ومناسبات 🎁",
-                images: [
-                    "https://images.unsplash.com/photo-1561181286-d3fee7d55364?w=800",
-                    "https://images.unsplash.com/photo-1563245372-f21724e3856d?w=800"
-                ]
-            },
-            dried: {
-                title: "أزهار مجففة وديكور 🌾",
+            wreaths: {
+                name: "إكليلات ومناسبات 🕊️",
                 images: [
                     "https://images.unsplash.com/photo-1508610048659-a06b669e3321?w=800",
-                    "https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=800"
+                    "https://images.unsplash.com/photo-1563245372-f21724e3856d?w=800"
                 ]
             }
         };
 
-        // فتح معرض التصنيف
-        function openGallery(categoryKey) {
-            const data = categories[categoryKey];
-            if (!data) return;
+        // معرفة التصنيف المختار من رابط الصفحة
+        const urlParams = new URLSearchParams(window.location.search);
+        let currentCat = urlParams.get('cat') || 'bouquets';
 
-            document.getElementById('modalTitle').innerText = data.title;
-            const grid = document.getElementById('galleryGrid');
+        // إنشاء أزرار الأقسام بالأعلى
+        function renderTabs() {
+            const tabsContainer = document.getElementById('tabsContainer');
+            tabsContainer.innerHTML = '';
+
+            Object.keys(galleryData).forEach(key => {
+                const btn = document.createElement('button');
+                btn.className = `tab-btn ${key === currentCat ? 'active' : ''}`;
+                btn.innerText = galleryData[key].name;
+                btn.onclick = () => selectCategory(key);
+                tabsContainer.appendChild(btn);
+            });
+        }
+
+        // عرض صور التصنيف المختار
+        function renderGallery(catKey) {
+            const data = galleryData[catKey] || galleryData['bouquets'];
+            document.getElementById('categoryTitle').innerText = data.name;
+
+            const grid = document.getElementById('photosGrid');
             grid.innerHTML = '';
 
-            data.images.forEach(imgSrc => {
-                const item = document.createElement('div');
-                item.className = 'gallery-item';
-                item.innerHTML = `<img src="${imgSrc}" alt="${data.title}">`;
-                item.onclick = () => openLightbox(imgSrc);
-                grid.appendChild(item);
+            data.images.forEach(imgUrl => {
+                const card = document.createElement('div');
+                card.className = 'photo-card';
+                card.innerHTML = `<img src="${imgUrl}" loading="lazy" alt="${data.name}">`;
+                card.onclick = () => openLightbox(imgUrl, data.name);
+                grid.appendChild(card);
             });
-
-            document.getElementById('galleryModal').classList.add('active');
         }
 
-        // إغلاق المعرض
-        function closeGallery() {
-            document.getElementById('galleryModal').classList.remove('active');
+        // التبديل بين التصنيفات
+        function selectCategory(catKey) {
+            currentCat = catKey;
+            renderTabs();
+            renderGallery(catKey);
+            window.history.replaceState(null, '', `gallery.html?cat=${catKey}`);
         }
 
-        // إغلاق المعرض بالضغط خارج النافذة
-        function closeModalOnOutsideClick(e) {
-            if (e.target.id === 'galleryModal') {
-                closeGallery();
-            }
-        }
-
-        // فتح الصورة بكامل الشاشة
-        function openLightbox(src) {
+        // فتح الصورة وتكبيرها
+        function openLightbox(src, categoryName) {
             document.getElementById('lightboxImg').src = src;
+            const message = encodeURIComponent(`مرحباً أزهار طقوش، أود الاستفسار عن هذه الباقة من قسم (${categoryName}): ${src}`);
+            document.getElementById('orderBtn').href = `https://wa.me/96170625359?text=${message}`;
             document.getElementById('lightbox').classList.add('active');
         }
 
-        // إغلاق عرض كامل الشاشة
+        // إغلاق التكبير
         function closeLightbox() {
             document.getElementById('lightbox').classList.remove('active');
         }
-    </script>
 
+        // تشغيل الصفحة
+        renderTabs();
+        renderGallery(currentCat);
+    </script>
 </body>
 </html>
-w
