@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>معرض الصور | أزهار طقوش</title>
+    <title>أزهار طقوش | Takkosh Flower Bristol</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
@@ -12,7 +12,8 @@
             --primary: #d9777f;
             --primary-hover: #c4626a;
             --whatsapp: #25D366;
-            --bg-color: #fdf8f9;
+            --whatsapp-hover: #1ebd5a;
+            --bg-gradient: linear-gradient(135deg, #fff5f5 0%, #f7eff2 100%);
             --card-bg: #ffffff;
             --text-main: #2c3e50;
             --text-muted: #666666;
@@ -26,13 +27,190 @@
         }
 
         body {
-            background-color: var(--bg-color);
+            background: var(--bg-gradient);
             color: var(--text-main);
             min-height: 100vh;
-            padding-bottom: 40px;
         }
 
-        /* شريط التنقل العلوي */
+        /* شاشة الصفحة الرئيسية */
+        #homeView {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .profile-card {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 480px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            padding: 30px 24px;
+            text-align: center;
+        }
+
+        .avatar-container {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 16px;
+        }
+
+        .avatar-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 15px rgba(217, 119, 127, 0.25);
+        }
+
+        .store-name-ar {
+            font-size: 1.55rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .store-name-en {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 8px;
+            direction: ltr;
+        }
+
+        .store-bio {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 22px;
+            line-height: 1.5;
+        }
+
+        .whatsapp-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: var(--whatsapp);
+            color: #fff;
+            text-decoration: none;
+            padding: 14px;
+            border-radius: 14px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: var(--whatsapp-hover);
+            transform: translateY(-2px);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.1);
+            opacity: 0.9;
+        }
+
+        .instagram { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+        .tiktok { background-color: #000000; }
+        .facebook { background-color: #1877F2; }
+
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-align: right;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        .category-card {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            background-color: #f0f0f0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .category-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .category-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.1) 60%, transparent 100%);
+            display: flex;
+            align-items: flex-end;
+            padding: 12px;
+        }
+
+        .category-name {
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* ------------------------------------------- */
+        /* شاشة صفحة المعرض (Gallery View) */
+        /* ------------------------------------------- */
+        #galleryView {
+            display: none;
+            padding-bottom: 40px;
+            background-color: #fdf8f9;
+            min-height: 100vh;
+        }
+
         .navbar {
             background: #ffffff;
             padding: 14px 20px;
@@ -49,13 +227,14 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            text-decoration: none;
+            background: #f5f5f5;
+            border: none;
             color: var(--text-main);
             font-weight: 700;
             font-size: 0.95rem;
-            background: #f5f5f5;
-            padding: 8px 14px;
+            padding: 8px 16px;
             border-radius: 12px;
+            cursor: pointer;
             transition: background 0.2s ease;
         }
 
@@ -69,13 +248,12 @@
             color: var(--primary);
         }
 
-        .container {
+        .gallery-container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px 16px;
         }
 
-        /* شريط أزرار التصنيفات الأفقي السريع */
         .tabs-container {
             display: flex;
             gap: 10px;
@@ -100,7 +278,6 @@
             cursor: pointer;
             color: var(--text-muted);
             transition: all 0.25s ease;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
         }
 
         .tab-btn.active {
@@ -126,7 +303,6 @@
             color: var(--text-muted);
         }
 
-        /* شبكة الصور */
         .photos-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -220,24 +396,89 @@
 </head>
 <body>
 
-    <div class="navbar">
-        <a href="index.html" class="back-btn">
-            <i class="fa-solid fa-arrow-right"></i>
-            الرئيسية
-        </a>
-        <div class="store-header-title">أزهار طقوش 🌸</div>
-    </div>
-
-    <div class="container">
-        <div class="tabs-container" id="tabsContainer">
+    <div id="homeView">
+        <div class="profile-card">
+            <div class="avatar-container">
+                <img src="2b0ac39db80a0b62f75956aa92515f10.jpg" alt="شعار أزهار طقوش">
             </div>
 
-        <div class="gallery-header">
-            <h1 id="categoryTitle">اسم القسم</h1>
-            <p>اضغط على أي صورة لتكبيرها والطلب المباشر</p>
+            <h1 class="store-name-ar">أزهار طقوش 🌸</h1>
+            <div class="store-name-en">Takkosh Flower Bristol</div>
+            <p class="store-bio">أجمل باقات الورد وتنسيقات الهدايا لجميع مناسباتكم السعيدة. خدمة توصيل سريعة وعناية فائقة.</p>
+
+            <a href="https://wa.me/96170625359?text=مرحباً،%20أود%20الاستفسار%20عن%20باقات%20الورد%20المتوفرة" target="_blank" class="whatsapp-btn">
+                <i class="fa-brands fa-whatsapp fa-xl"></i>
+                تواصل معنا عبر واتساب
+            </a>
+
+            <div class="social-links">
+                <a href="https://www.instagram.com/flowers.takkoush?igsi=MWNuZTF5ZTVnZ2ozdA==" target="_blank" class="social-icon instagram" title="إنستغرام">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://www.tiktok.com/@takkoush.bristol?_r=1&_t=ZS-99LijOKpa6f" target="_blank" class="social-icon tiktok" title="تيك توك">
+                    <i class="fa-brands fa-tiktok"></i>
+                </a>
+                <a href="https://www.facebook.com/share/1C7TgWeXVU/" target="_blank" class="social-icon facebook" title="فيسبوك">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+            </div>
+
+            <div class="section-title">
+                <i class="fa-solid fa-layer-group" style="color: var(--primary);"></i>
+                تصفح أقسام الأزهار
+            </div>
+            
+            <div class="categories-grid">
+                <div class="category-card" onclick="goToGallery('bouquets')">
+                    <img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=400" alt="بوكي وسلال ورد">
+                    <div class="category-overlay">
+                        <span class="category-name"><i class="fa-solid fa-fan"></i> بوكي وسلال ورد</span>
+                    </div>
+                </div>
+
+                <div class="category-card" onclick="goToGallery('wedding')">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400" alt="بوكيات أعراس">
+                    <div class="category-overlay">
+                        <span class="category-name"><i class="fa-solid fa-ring"></i> بوكيات أعراس</span>
+                    </div>
+                </div>
+
+                <div class="category-card" onclick="goToGallery('grad')">
+                    <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=400" alt="باقات تخرج">
+                    <div class="category-overlay">
+                        <span class="category-name"><i class="fa-solid fa-graduation-cap"></i> باقات تخرج</span>
+                    </div>
+                </div>
+
+                <div class="category-card" onclick="goToGallery('wreaths')">
+                    <img src="https://images.unsplash.com/photo-1508610048659-a06b669e3321?w=400" alt="إكليلات ومناسبات">
+                    <div class="category-overlay">
+                        <span class="category-name"><i class="fa-solid fa-dove"></i> إكليلات ومناسبات</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="galleryView">
+        <div class="navbar">
+            <button class="back-btn" onclick="goToHome()">
+                <i class="fa-solid fa-arrow-right"></i>
+                الرئيسية
+            </button>
+            <div class="store-header-title">أزهار طقوش 🌸</div>
         </div>
 
-        <div class="photos-grid" id="photosGrid"></div>
+        <div class="gallery-container">
+            <div class="tabs-container" id="tabsContainer"></div>
+
+            <div class="gallery-header">
+                <h1 id="categoryTitle">اسم القسم</h1>
+                <p>اضغط على أي صورة لتكبيرها والطلب المباشر</p>
+            </div>
+
+            <div class="photos-grid" id="photosGrid"></div>
+        </div>
     </div>
 
     <div class="lightbox" id="lightbox">
@@ -250,7 +491,6 @@
     </div>
 
     <script>
-        // قاعدة بيانات التصنيفات وصورها (يمكنك إضافة أي عدد تريده هنا بسهولة)
         const galleryData = {
             bouquets: {
                 name: "بوكي وسلال ورد 💐",
@@ -283,11 +523,26 @@
             }
         };
 
-        // معرفة التصنيف المختار من رابط الصفحة
-        const urlParams = new URLSearchParams(window.location.search);
-        let currentCat = urlParams.get('cat') || 'bouquets';
+        let currentCat = 'bouquets';
 
-        // إنشاء أزرار الأقسام بالأعلى
+        // الانتقال لصفحة المعرض
+        function goToGallery(catKey) {
+            currentCat = catKey;
+            document.getElementById('homeView').style.display = 'none';
+            document.getElementById('galleryView').style.display = 'block';
+            window.scrollTo(0, 0);
+            renderTabs();
+            renderGallery(catKey);
+        }
+
+        // العودة للصفحة الرئيسية
+        function goToHome() {
+            document.getElementById('galleryView').style.display = 'none';
+            document.getElementById('homeView').style.display = 'flex';
+            window.scrollTo(0, 0);
+        }
+
+        // إنشاء أزرار الأقسام
         function renderTabs() {
             const tabsContainer = document.getElementById('tabsContainer');
             tabsContainer.innerHTML = '';
@@ -296,12 +551,16 @@
                 const btn = document.createElement('button');
                 btn.className = `tab-btn ${key === currentCat ? 'active' : ''}`;
                 btn.innerText = galleryData[key].name;
-                btn.onclick = () => selectCategory(key);
+                btn.onclick = () => {
+                    currentCat = key;
+                    renderTabs();
+                    renderGallery(key);
+                };
                 tabsContainer.appendChild(btn);
             });
         }
 
-        // عرض صور التصنيف المختار
+        // عرض صور القسم
         function renderGallery(catKey) {
             const data = galleryData[catKey] || galleryData['bouquets'];
             document.getElementById('categoryTitle').innerText = data.name;
@@ -318,15 +577,7 @@
             });
         }
 
-        // التبديل بين التصنيفات
-        function selectCategory(catKey) {
-            currentCat = catKey;
-            renderTabs();
-            renderGallery(catKey);
-            window.history.replaceState(null, '', `gallery.html?cat=${catKey}`);
-        }
-
-        // فتح الصورة وتكبيرها
+        // تكبير الصورة
         function openLightbox(src, categoryName) {
             document.getElementById('lightboxImg').src = src;
             const message = encodeURIComponent(`مرحباً أزهار طقوش، أود الاستفسار عن هذه الباقة من قسم (${categoryName}): ${src}`);
@@ -334,14 +585,9 @@
             document.getElementById('lightbox').classList.add('active');
         }
 
-        // إغلاق التكبير
         function closeLightbox() {
             document.getElementById('lightbox').classList.remove('active');
         }
-
-        // تشغيل الصفحة
-        renderTabs();
-        renderGallery(currentCat);
     </script>
 </body>
 </html>
